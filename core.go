@@ -148,6 +148,12 @@ func (c *core) Write(ent zapcore.Entry, fields []zapcore.Field) error {
 			// So attempt to add a generic service name
 			fields = c.withServiceContext("unknown", c.config.ServiceVersion, fields)
 		}
+		if !ent.Caller.Defined {
+			fields = append(fields, zap.String(
+				"@type",
+				"type.googleapis.com/google.devtools.clouderrorreporting.v1beta1.ReportedErrorEvent",
+			))
+		}
 	}
 
 	c.tempLabels.reset()
