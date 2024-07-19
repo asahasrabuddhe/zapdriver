@@ -43,7 +43,7 @@ type HTTPPayload struct {
 	RequestSize string `json:"requestSize"`
 
 	// The request body.
-	RequestBody any `json:"requestBody"`
+	RequestBody interface{} `json:"requestBody"`
 
 	// The response code indicating the status of response.
 	//
