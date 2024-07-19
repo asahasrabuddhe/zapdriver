@@ -42,9 +42,6 @@ type HTTPPayload struct {
 	// headers and the request body.
 	RequestSize string `json:"requestSize"`
 
-	// The request body.
-	RequestBody any `json:"requestBody"`
-
 	// The response code indicating the status of response.
 	//
 	// Examples: 200, 404.
