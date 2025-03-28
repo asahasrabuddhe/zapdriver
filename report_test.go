@@ -13,7 +13,7 @@ func TestErrorReport(t *testing.T) {
 	got := ErrorReport(runtime.Caller(0)).Interface.(*reportContext)
 
 	assert.Contains(t, got.ReportLocation.File, "zapdriver/report_test.go")
-	assert.Equal(t, "13", got.ReportLocation.Line)
+	assert.Equal(t, 13, got.ReportLocation.Line)
 	assert.Contains(t, got.ReportLocation.Function, "zapdriver.TestErrorReport")
 }
 
@@ -23,6 +23,6 @@ func TestNewReportContext(t *testing.T) {
 	got := newReportContext(runtime.Caller(0))
 
 	assert.Contains(t, got.ReportLocation.File, "zapdriver/report_test.go")
-	assert.Equal(t, "23", got.ReportLocation.Line)
+	assert.Equal(t, 23, got.ReportLocation.Line)
 	assert.Contains(t, got.ReportLocation.Function, "zapdriver.TestNewReportContext")
 }

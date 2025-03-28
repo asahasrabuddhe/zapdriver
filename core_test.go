@@ -2,7 +2,6 @@ package zapdriver
 
 import (
 	"runtime"
-	"strconv"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -335,7 +334,7 @@ func TestWriteReportAllErrors(t *testing.T) {
 	context := logs.All()[0].ContextMap()[contextKey].(map[string]interface{})
 	rLocation := context["reportLocation"].(map[string]interface{})
 	assert.Contains(t, rLocation["filePath"], "zapdriver/core_test.go")
-	assert.Equal(t, strconv.Itoa(line), rLocation["lineNumber"])
+	assert.Equal(t, line, rLocation["lineNumber"])
 	assert.Contains(t, rLocation["functionName"], "zapdriver.TestWriteReportAllErrors")
 
 	// Assert that a service context was attached even though service name was not set

@@ -2,7 +2,6 @@ package zapdriver
 
 import (
 	"runtime"
-	"strconv"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -23,14 +22,14 @@ func ErrorReport(pc uintptr, file string, line int, ok bool) zap.Field {
 // if any.
 type reportLocation struct {
 	File     string `json:"filePath"`
-	Line     string `json:"lineNumber"`
+	Line     int    `json:"lineNumber"`
 	Function string `json:"functionName"`
 }
 
 // MarshalLogObject implements zapcore.ObjectMarshaller interface.
 func (location reportLocation) MarshalLogObject(enc zapcore.ObjectEncoder) error {
 	enc.AddString("filePath", location.File)
-	enc.AddString("lineNumber", location.Line)
+	enc.AddInt("lineNumber", location.Line)
 	enc.AddString("functionName", location.Function)
 
 	return nil
@@ -61,7 +60,7 @@ func newReportContext(pc uintptr, file string, line int, ok bool) *reportContext
 	context := &reportContext{
 		ReportLocation: reportLocation{
 			File:     file,
-			Line:     strconv.Itoa(line),
+			Line:     line,
 			Function: function,
 		},
 	}
